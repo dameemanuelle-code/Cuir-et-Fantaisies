@@ -486,3 +486,14 @@ body {
     padding: 1.4rem 1.25rem 1.5rem;
   }
 }
+/* Apparition douce des sections */
+.section.pre-visible {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

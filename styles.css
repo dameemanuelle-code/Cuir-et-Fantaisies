@@ -67,19 +67,20 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-.logo-monogram {
-  border-radius: 999px;
-  border: 1px solid rgba(243, 226, 165, 0.55);
-  padding: 0.28rem 0.55rem;
-  font-size: 0.85rem;
-  font-family: "Playfair Display", serif;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--or-vif);
-  background: radial-gradient(circle at 10% 0%, #3a151f, #080306);
+/* NOUVEAU : logo image */
+.logo-image {
+  height: 32px;        /* ajuste selon ton fichier */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Variante un peu plus petite dans le footer */
+.logo-image-footer {
+  height: 26px;
 }
 
 .logo-text {
@@ -89,6 +90,7 @@ body {
   letter-spacing: 0.22em;
   color: var(--texte-principal);
 }
+
 
 .main-nav ul {
   list-style: none;

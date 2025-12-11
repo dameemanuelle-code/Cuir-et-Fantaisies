@@ -208,6 +208,13 @@ body {
   text-align: center;
   z-index: 1;
 }
+.hero-logo {
+  width: 110px;           /* Ajuste 90–150px selon ton goût */
+  height: auto;
+  margin: 0 auto 1rem;    /* centre + espace sous le logo */
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.45));
+}
 
 .hero-overline {
   font-size: 0.75rem;

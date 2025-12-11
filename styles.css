@@ -529,13 +529,4 @@ body {
   box-shadow: 0 10px 32px rgba(0,0,0,0.75);
   transform: translateY(-2px);
 }
-/* Empêche les boutons des cartes d'être trop larges */
-.espaces-grid .btn {
-  width: auto !important;      /* le bouton s’adapte à son texte */
-  max-width: 100%;             /* sécurité si texte long */
-  display: inline-flex;        /* pour éviter qu'il s'étire */
-  margin: 0.8rem auto 0;       /* centre le bouton */
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
-}
 

@@ -274,41 +274,48 @@ body {
 
 }
 
-.btn-main {
-  background: linear-gradient(135deg, #7b1025, #b9334a);
-  color: #fffaf4;
-  box-shadow: 0 14px 40px rgba(123, 16, 37, 0.6);
-  border-color: rgba(243, 226, 165, 0.65);
+/* Style uniforme, sans effets flashy */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+
+  /* Style uniforme */
+  background-color: rgba(40, 10, 15, 0.85);  /* bordeaux très sombre */
+  color: var(--or-vif);                     /* ton or existant */
+  border: 1px solid rgba(243, 226, 165, 0.35); /* or doux */
+
+  /* Suppression des effets */
+  box-shadow: none;
+  transition: opacity 0.15s ease;
+  white-space: normal;
+  text-align: center;
 }
 
-.btn-main:hover {
-  background: linear-gradient(135deg, #b9334a, #e24b66);
-  transform: translateY(-1px);
-  box-shadow: 0 16px 45px rgba(226, 75, 102, 0.75);
+/* Hover discret, sans déplacement ni glow */
+.btn:hover {
+  opacity: 0.8;
 }
 
+/* Si tu veux garder une version outline sobre */
 .btn-outline {
-  border-color: rgba(243, 226, 165, 0.6);
-  background: rgba(6, 4, 9, 0.6);
+  background-color: transparent;
+  border: 1px solid rgba(243, 226, 165, 0.5);
   color: var(--or-vif);
 }
 
 .btn-outline:hover {
-  background: rgba(243, 226, 165, 0.13);
-  transform: translateY(-1px);
+  opacity: 0.8;
 }
 
-.btn-soft {
-  background: radial-gradient(circle at top, rgba(243, 226, 165, 0.18), rgba(20, 12, 14, 0.95));
-  border: 1px solid rgba(243, 226, 165, 0.35);
-  color: var(--or-vif);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85);
-}
-
-.btn-soft:hover {
-  background: radial-gradient(circle at top, rgba(243, 226, 165, 0.28), rgba(20, 12, 14, 0.98));
-  transform: translateY(-1px);
-}
 /* Réduction des boutons dans la section "Les questionnaires à remplir" */
 .questionnaires-grid .btn {
   width: auto !important;

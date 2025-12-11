@@ -34,7 +34,24 @@ body {
   margin: 0;
   padding: 0;
 }
+/* --- FOND GRADIENT + CUIR --- */
+body {
+  margin: 0;
+  padding: 0;
 
+  /* Superposition : gradient + texture cuir */
+  background: 
+      linear-gradient(135deg, rgba(60, 0, 10, 0.75), rgba(0, 0, 0, 0.85)),
+      url("images/cuir-noir.png");
+
+  background-size: cover;       /* La texture couvre l’écran */
+  background-repeat: repeat;    /* Pour garder l’effet naturel du cuir */
+  background-position: center;
+  background-attachment: fixed; /* Effet luxe de profondeur */
+
+  color: #f2e6d0;               /* Doré très doux pour le texte */
+  font-family: "Lora", serif;
+}
 html {
   scroll-behavior: smooth;
 }

@@ -19,7 +19,13 @@
   --radius-moyen: 12px;
   --transition-rapide: 0.25s ease-out;
 }
-
+body {
+  background-image: url("images/cuir-noir.png");
+  background-repeat: repeat; /* si tu veux un seamless */
+  background-size: 600px; /* ajustable selon goût */
+  background-attachment: fixed; /* effet luxe */
+  background-color: #111; /* backup */
+}
 /* Reset simple */
 *,
 *::before,

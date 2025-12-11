@@ -264,7 +264,10 @@ body {
   cursor: pointer;
   border: 1px solid transparent;
   transition: background-color var(--transition-rapide), color var(--transition-rapide), transform var(--transition-rapide), box-shadow var(--transition-rapide), border-color var(--transition-rapide);
-  white-space: nowrap;
+    white-space: normal;
+  text-align: center;
+}
+
 }
 
 .btn-main {

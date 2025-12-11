@@ -251,70 +251,35 @@ body {
    BOUTONS
    =========================== */
 
+/* Bouton de base : forme, typo, taille */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.7rem 1.6rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: background-color var(--transition-rapide),
-              color var(--transition-rapide),
-              transform var(--transition-rapide),
-              box-shadow var(--transition-rapide),
-              border-color var(--transition-rapide);
-  white-space: normal;   /* surtout PAS nowrap */
-  text-align: center;
-}
-
-}
-
-/* Style uniforme, sans effets flashy */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.65rem 1.4rem;
+  padding: 0.6rem 1.6rem;
   border-radius: 999px;
   font-size: 0.8rem;
-  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-
-  /* Style uniforme */
-  background-color: rgba(40, 10, 15, 0.85);  /* bordeaux très sombre */
-  color: var(--or-vif);                     /* ton or existant */
-  border: 1px solid rgba(243, 226, 165, 0.35); /* or doux */
-
-  /* Suppression des effets */
-  box-shadow: none;
-  transition: opacity 0.15s ease;
+  border: 1px solid rgba(243, 226, 165, 0.35);
   white-space: normal;
   text-align: center;
+
+  /* couleurs par défaut (bordeaux) */
+  background: linear-gradient(135deg, #7b1025, #b9334a);
+  color: #fffaf4;
+
+  /* effet très léger, pas de gros glow */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  transition: opacity 0.18s ease;
 }
 
-/* Hover discret, sans déplacement ni glow */
 .btn:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* Si tu veux garder une version outline sobre */
-.btn-outline {
-  background-color: transparent;
-  border: 1px solid rgba(243, 226, 165, 0.5);
-  color: var(--or-vif);
-}
-
-.btn-outline:hover {
-  opacity: 0.8;
-}
 
 /* Réduction des boutons dans la section "Les questionnaires à remplir" */
 .questionnaires-grid .btn {

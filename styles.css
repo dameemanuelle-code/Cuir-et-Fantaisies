@@ -133,38 +133,46 @@ body {
   background: var(--or-doux);
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
-/* Conteneur rond pour créer le médaillon doré */
-.hero-logo-wrapper {
-  width: 120px;          /* taille du médaillon */
-  height: 120px;
-  margin: 0 auto 1rem;   /* centré + espace en bas */
+/* Médaillon rond doré */
+.hero-medallion {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.2rem;
   border-radius: 50%;
+  border: 3px solid rgba(243, 226, 165, 0.85); /* or */
+  
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* Bordure dorée élégante */
-  border: 3px solid rgba(243, 226, 165, 0.85);
-
-  /* Effet de relief */
-  box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.45),     /* ombre extérieure */
-    inset 0 0 12px rgba(243, 226, 165, 0.25), /* brillance intérieure or */
-    inset 0 0 25px rgba(0, 0, 0, 0.4);        /* profondeur intérieure */
-
-  background: radial-gradient(
-    circle at 30% 30%,
+  background: radial-gradient(circle at 30% 30%,
     rgba(243, 226, 165, 0.25),
     rgba(0, 0, 0, 0.7) 70%
   );
+
+  /* Relief */
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.45),
+    inset 0 0 20px rgba(0, 0, 0, 0.4),
+    inset 0 0 10px rgba(243, 226, 165, 0.25);
 }
 
-/* Logo à l'intérieur du médaillon */
-.hero-logo {
-  width: 70%;
+/* Masque circulaire pour que le logo RENTRE dans le médaillon */
+.hero-medallion-inner {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden; /* coupe le carré en cercle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo ajusté */
+.hero-medallion-inner img {
+  width: 110%;
   height: auto;
-  display: block;
-  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.4)); /* effet subtil */
+  object-fit: cover;
 }
 
 /* ===========================

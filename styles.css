@@ -305,6 +305,15 @@ body {
   background: radial-gradient(circle at top, rgba(243, 226, 165, 0.28), rgba(20, 12, 14, 0.98));
   transform: translateY(-1px);
 }
+/* Réduction des boutons dans la section "Les questionnaires à remplir" */
+.questionnaires-grid .btn {
+  width: auto !important;
+  max-width: 260px;
+  display: inline-flex;
+  margin: 0.9rem auto 0;
+  white-space: normal !important;
+  text-align: center;
+}
 
 /* ===========================
    CARTES & GRILLES

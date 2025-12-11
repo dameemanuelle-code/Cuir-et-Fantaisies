@@ -263,8 +263,12 @@ body {
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background-color var(--transition-rapide), color var(--transition-rapide), transform var(--transition-rapide), box-shadow var(--transition-rapide), border-color var(--transition-rapide);
-    white-space: normal;
+  transition: background-color var(--transition-rapide),
+              color var(--transition-rapide),
+              transform var(--transition-rapide),
+              box-shadow var(--transition-rapide),
+              border-color var(--transition-rapide);
+  white-space: normal;   /* surtout PAS nowrap */
   text-align: center;
 }
 

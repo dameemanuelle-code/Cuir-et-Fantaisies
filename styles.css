@@ -192,7 +192,10 @@ body{
   height:100%;
   display:block;
   object-fit:cover;
-  transform:scale(var(--logo-zoom)); /* <-- “mange” le carré du PNG */
+  .hero-logo-mask img {
+  transform: translateX(1px) scale(var(--logo-zoom));
+  transform-origin: center center;
+}
   transform-origin:center;
   filter:drop-shadow(0 10px 26px rgba(0,0,0,.55));
 }

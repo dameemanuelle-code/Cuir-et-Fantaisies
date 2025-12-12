@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cuir & Fantaisies – Portail officiel</title>
-  <meta name="description" content="Cuir & Fantaisies – Portail exclusif vers nos expériences privées : Chambre Rose, Chambre Noire et futurs espaces boudoir.">
+  <meta name="description" content="Cuir & Fantaisies – Portail exclusif vers nos expériences privées : Chambre Rose, Chambre Noire et futurs espaces boudoir." />
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 
+  <!-- Polices -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,10 +18,10 @@
   <!-- NAV -->
   <header class="site-header">
     <div class="nav-inner">
-      <a class="brand" href="#accueil" aria-label="Retour accueil">
+      <div class="brand">
         <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-name">Cuir &amp; Fantaisies</span>
-      </a>
+        <span class="brand-text">Cuir &amp; Fantaisies</span>
+      </div>
 
       <nav class="main-nav" aria-label="Navigation principale">
         <ul>
@@ -41,18 +42,20 @@
 
   <!-- HERO -->
   <section id="accueil" class="hero section">
-    <div class="hero-overlay"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
 
-    <div class="hero-logo-mask">
-  <img src="images/Logo-CF-Header.png" alt="Cuir et Fantaisies">
-</div>
+    <div class="hero-content">
+      <!-- MASQUE CIRCULAIRE (anti-carré) -->
+      <div class="hero-logo-mask" aria-hidden="true">
+        <img src="images/Logo-CF-Header.png" alt="" />
+      </div>
 
       <p class="hero-overline">Portail officiel</p>
 
       <h1>Cuir &amp; Fantaisies</h1>
 
       <p class="hero-subtitle">
-        L’antichambre de nos univers privés.<br>
+        L’antichambre de nos univers privés.<br />
         Un passage obligé vers la Chambre Rose, la Chambre Noire et nos expériences protocolaires personnalisées.
       </p>
 
@@ -69,8 +72,8 @@
       <h2 class="section-title">Notre vision</h2>
       <p>
         <strong>Cuir &amp; Fantaisies</strong> est le portail central de nos services privés de domination, de transformation et de jeux de rôle.
-        Ce site d’entrée existe pour vous guider avec clarté vers les expériences qui vous correspondent réellement, en respectant un cadre
-        strict, luxueux et soigneusement structuré.
+        Ce site d’entrée existe pour vous guider avec clarté vers les expériences qui vous correspondent réellement, en respectant un cadre strict,
+        luxueux et soigneusement structuré.
       </p>
       <p>
         Trois personnalités, trois énergies, deux chambres principales et un univers en expansion : la
@@ -93,42 +96,27 @@
         <article class="card card-outline">
           <h3>Dame Émanuelle</h3>
           <p class="card-subtitle">Autorité aristocratique &amp; raffinement</p>
-          <p>
-            Femme blonde, charismatique et rigoureusement élégante, Dame Émanuelle incarne l’autorité protocolaire et l’art de la mise en scène.
-            Sous son regard, chaque geste, chaque mot et chaque minute prennent une valeur rituelle.
-          </p>
+          <p>Femme blonde, charismatique et rigoureusement élégante, Dame Émanuelle incarne l’autorité protocolaire et l’art de la mise en scène.</p>
           <div class="card-links">
-            <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-rose-flamboyant/" target="_blank" rel="noopener noreferrer">
-              Dame Émanuelle
-            </a>
+            <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-rose-flamboyant/" target="_blank" rel="noopener noreferrer">Dame Émanuelle</a>
           </div>
         </article>
 
         <article class="card card-outline">
           <h3>Lady Zaphir</h3>
           <p class="card-subtitle">Présence rousse &amp; intensité sensuelle</p>
-          <p>
-            Grande, rousse, magnétique, Lady Zaphir marie une sensualité assumée à une cruauté raffinée.
-            Elle explore la tension, l’anticipation et les jeux de pouvoir avec précision, tout en maintenant un cadre exigeant.
-          </p>
+          <p>Grande, rousse, magnétique, Lady Zaphir marie une sensualité assumée à une cruauté raffinée, dans un cadre exigeant.</p>
           <div class="card-links">
-            <a class="btn btn-card" href="https://ladyzaphir-dev.github.io/Site-turquoise/" target="_blank" rel="noopener noreferrer">
-              Lady Zaphir
-            </a>
+            <a class="btn btn-card" href="https://ladyzaphir-dev.github.io/Site-turquoise/" target="_blank" rel="noopener noreferrer">Lady Zaphir</a>
           </div>
         </article>
 
         <article class="card card-outline">
           <h3>DomSteel</h3>
           <p class="card-subtitle">Énergie masculine &amp; polyvalence</p>
-          <p>
-            Présence masculine switch, DomSteel apporte un contraste et un équilibre au duo. Il intervient dans des scénarios variés :
-            bondage, jeux de rôle, duo ou trio, selon les protocoles définis par l’équipe.
-          </p>
+          <p>Présence masculine switch, DomSteel apporte contraste et équilibre au duo, selon les protocoles définis par l’équipe.</p>
           <div class="card-links">
-            <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-noir/" target="_blank" rel="noopener noreferrer">
-              DomSteel
-            </a>
+            <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-noir/" target="_blank" rel="noopener noreferrer">DomSteel</a>
           </div>
         </article>
       </div>
@@ -144,34 +132,21 @@
         <article class="card card-filled rose-card">
           <h3>La Chambre Rose</h3>
           <p class="card-subtitle">Féminisation &amp; jeux de rôles</p>
-          <p>
-            Univers dédié à la transformation, aux scénarios, à la mise en valeur de la féminité et aux rituels esthétiques.
-            Ici, l’accent est mis sur l’imaginaire, le détail et les jeux de rôle raffinés.
-          </p>
-          <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-rose-flamboyant/" target="_blank" rel="noopener noreferrer">
-            Accéder à La Chambre Rose
-          </a>
+          <p>Univers dédié à la transformation, aux scénarios, à la mise en valeur de la féminité et aux rituels esthétiques.</p>
+          <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-rose-flamboyant/" target="_blank" rel="noopener noreferrer">Accéder à La Chambre Rose</a>
         </article>
 
         <article class="card card-filled noire-card">
           <h3>La Chambre Noire</h3>
           <p class="card-subtitle">BDSM classique &amp; intensité contrôlée</p>
-          <p>
-            Espace réservé aux pratiques BDSM plus intenses : domination, bondage, discipline, scénarios sombres et protocoles serrés.
-            Un environnement strict, luxueux et focalisé sur les limites et la sécurité.
-          </p>
-          <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-noir/" target="_blank" rel="noopener noreferrer">
-            Accéder à La Chambre Noire
-          </a>
+          <p>Espace réservé aux pratiques plus intenses : domination, bondage, discipline, scénarios sombres et protocoles serrés.</p>
+          <a class="btn btn-card" href="https://dameemanuelle-code.github.io/Chambre-noir/" target="_blank" rel="noopener noreferrer">Accéder à La Chambre Noire</a>
         </article>
 
         <article class="card card-outline boudoir-card">
           <h3>Le Boudoir (à venir)</h3>
           <p class="card-subtitle">Rituels, transitions &amp; intimité</p>
-          <p>
-            Un espace intimiste, pensé pour la préparation, les échanges préalables, les photos, les transitions entre les univers
-            et certains rituels délicats. Ce boudoir complétera bientôt le parcours.
-          </p>
+          <p>Un espace intimiste pensé pour la préparation, les échanges, certaines transitions, et des rituels délicats.</p>
         </article>
       </div>
     </div>
@@ -181,29 +156,25 @@
   <section id="etapes" class="section section-gradient">
     <div class="section-inner">
       <h2 class="section-title">Les premières étapes indispensables</h2>
-      <p>
-        Avant de pouvoir accéder à nos questionnaires détaillés, puis éventuellement à une rencontre, nous demandons à chaque personne
-        de respecter trois conditions fondamentales :
-      </p>
+
+      <p>Avant de pouvoir accéder à nos questionnaires, nous demandons à chaque personne de respecter trois conditions fondamentales :</p>
 
       <ol class="etapes-liste">
         <li>
           <span class="etape-num">1</span>
-          <p><strong>Avoir une idée claire de ce qui est recherché.</strong><br>Réfléchir à vos envies, vos limites et vos fantasmes principaux.</p>
+          <p><strong>Avoir une idée claire de ce qui est recherché.</strong><br />Envies, limites, fantasmes principaux : une base réfléchie.</p>
         </li>
         <li>
           <span class="etape-num">2</span>
-          <p><strong>S’exprimer de façon compréhensible et structurée.</strong><br>Messages clairs, articulés, sans excès de familiarité.</p>
+          <p><strong>S’exprimer de façon compréhensible et structurée.</strong><br />Messages clairs, articulés, sans excès de familiarité.</p>
         </li>
         <li>
           <span class="etape-num">3</span>
-          <p><strong>Faire preuve de respect envers tous les membres de l’équipe.</strong><br>Sans cela, le processus s’arrête immédiatement.</p>
+          <p><strong>Faire preuve de respect envers tous les membres de l’équipe.</strong><br />Sans cela, le processus s’arrête immédiatement.</p>
         </li>
       </ol>
 
-      <p class="etapes-note">
-        Si ces trois conditions vous semblent naturelles, les questionnaires ci-dessous vous permettront d’avancer dans le protocole.
-      </p>
+      <p class="etapes-note">Si ces trois conditions vous semblent naturelles, les questionnaires ci-dessous vous permettront d’avancer dans le protocole.</p>
     </div>
   </section>
 
@@ -211,57 +182,40 @@
   <section id="questionnaires" class="section section-dark">
     <div class="section-inner">
       <h2 class="section-title">Les questionnaires à remplir</h2>
-      <p>
-        Les questionnaires sont destinés aux personnes ayant déjà pris le temps de réfléchir à leurs envies et qui comprennent
-        que ce processus fait partie intégrante du protocole.
-      </p>
+
+      <p>Ils ne sont pas un simple formulaire : c’est une première preuve de sérieux et de cohérence.</p>
 
       <div class="cards-grid questionnaires-grid">
         <article class="card card-outline">
           <h3>Informations générales</h3>
-          <p class="card-subtitle">Pour mieux connaître votre profil et vos attentes</p>
-          <p>
-            Ce questionnaire établit les informations essentielles : expérience, limites, motivations, objectifs et éléments nécessaires
-            pour déterminer la compatibilité générale avec notre cadre.
-          </p>
+          <p class="card-subtitle">Profil &amp; attentes</p>
+          <p>Informations essentielles : expérience, limites, motivations, objectifs, compatibilité avec notre cadre.</p>
           <div class="card-links">
-            <a class="btn btn-card" href="https://forms.gle/YMft1sk5GBNjLkUS6" target="_blank" rel="noopener noreferrer">
-              Remplir le questionnaire Informations générales
-            </a>
+            <a class="btn" href="https://forms.gle/YMft1sk5GBNjLkUS6" target="_blank" rel="noopener noreferrer">Remplir</a>
           </div>
         </article>
 
         <article class="card card-outline">
           <h3>Choix d'activités BDSM</h3>
-          <p class="card-subtitle">Pour définir vos préférences et vos limites</p>
-          <p>
-            Ce questionnaire identifie vos envies, zones d’exploration, limites et activités BDSM. Il aide l’équipe à comprendre vos intérêts
-            pour préparer des scénarios adaptés.
-          </p>
+          <p class="card-subtitle">Préférences &amp; limites</p>
+          <p>Identifier vos envies, zones d’exploration, limites et activités qui vous attirent, pour préparer des scénarios adaptés.</p>
           <div class="card-links">
-            <a class="btn btn-card" href="https://forms.gle/XMuPhb1KcyAjGkhD9" target="_blank" rel="noopener noreferrer">
-              Remplir le questionnaire Choix d'activités BDSM
-            </a>
+            <a class="btn" href="https://forms.gle/XMuPhb1KcyAjGkhD9" target="_blank" rel="noopener noreferrer">Remplir</a>
           </div>
         </article>
       </div>
 
       <p class="etapes-note">
-        Une fois un questionnaire rempli, vous serez contacté(e) uniquement si votre profil, votre attitude et vos attentes correspondent
-        à notre cadre et à nos disponibilités.
+        Une fois un questionnaire rempli, vous serez contacté(e) uniquement si votre profil, votre attitude et vos attentes correspondent à notre cadre
+        et à nos disponibilités.
       </p>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-text">
-        Discrétion absolue – Aucune information partagée ne sera divulguée à l’extérieur de l’équipe.
-      </p>
-      <p class="footer-text footer-small">
-        Portail d’entrée vers La Chambre Rose, La Chambre Noire et leurs univers affiliés.
-      </p>
+      <p class="footer-text">Discrétion absolue – Aucune information partagée ne sera divulguée à l’extérieur de l’équipe.</p>
+      <p class="footer-text footer-small">Portail d’entrée vers La Chambre Rose, La Chambre Noire et leurs univers affiliés.</p>
     </div>
   </footer>
 

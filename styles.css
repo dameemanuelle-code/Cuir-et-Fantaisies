@@ -155,7 +155,31 @@ body{
 }
 
 .hero-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem}
+/* === MASQUE CIRCULAIRE DU LOGO === */
+.hero-logo-mask {
+  width: 300px;               /* ajuste si tu veux plus grand */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;           /* COUPE LE CARRÉ */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  /* optionnel : légère profondeur */
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.65),
+    inset 0 0 20px rgba(0,0,0,0.4);
+
+  background: transparent;    /* PAS de fond */
+}
+
+.hero-logo-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* remplit le cercle */
+  display: block;
+}
 /* ===========================
    BOUTONS (uniformes, sans effet agressif)
    =========================== */

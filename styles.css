@@ -358,3 +358,10 @@ body{
   .section{padding:3.5rem 1.1rem}
   .card{padding:1.4rem 1.25rem 1.5rem}
 }
+.card-description {
+  margin-bottom: 1.2rem;
+}
+
+.card .btn {
+  margin-top: 0.5rem;
+}

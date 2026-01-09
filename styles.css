@@ -365,3 +365,59 @@ body{
 .card .btn {
   margin-top: 0.5rem;
 }
+/* ===========================
+   RÉSERVATIONS
+   =========================== */
+
+.reservation-intro {
+  max-width: 620px;
+  margin: 0 auto 2.2rem;
+  text-align: center;
+  color: var(--texte-secondaire);
+  font-size: 0.95rem;
+}
+
+.reservation-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.reservation-card {
+  padding: 1.6rem 1.4rem;
+  border-radius: var(--radius-grand);
+  background: radial-gradient(circle at top, rgba(123, 16, 37, 0.35), rgba(8, 4, 8, 0.96));
+  border: 1px solid rgba(243, 226, 165, 0.35);
+  text-align: center;
+  box-shadow: var(--ombre-carte);
+}
+
+.reservation-card h3 {
+  font-family: "Playfair Display", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  color: var(--or-vif);
+}
+
+.reservation-contact a {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--texte-principal);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.reservation-contact a:hover {
+  color: var(--or-vif);
+}
+
+.reservation-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--texte-secondaire);
+  max-width: 560px;
+  margin: 0 auto;
+}

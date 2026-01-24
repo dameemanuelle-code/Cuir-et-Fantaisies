@@ -114,19 +114,18 @@ body{
   width:21px;height:2px;
   background:var(--or-doux);
 }
-.trio-image {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.2rem;
+.trio-photo{
+  position: relative;
 }
 
-.trio-image img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
+.trio-photo::before{
+  content:"";
+  position:absolute;
+  width: 132px;
+  height: 132px;
   border-radius: 50%;
-  border: 2px solid rgba(212, 175, 55, 0.6); /* or doux */
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(212,175,55,.25);
+  filter: blur(.2px);
 }
 /* ================= SECTIONS ================= */
 .section{position:relative;padding:4.5rem 1.25rem}

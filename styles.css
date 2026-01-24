@@ -114,7 +114,20 @@ body{
   width:21px;height:2px;
   background:var(--or-doux);
 }
+.trio-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
 
+.trio-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.6); /* or doux */
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.6);
+}
 /* ================= SECTIONS ================= */
 .section{position:relative;padding:4.5rem 1.25rem}
 .section-inner{max-width:900px;margin:0 auto}

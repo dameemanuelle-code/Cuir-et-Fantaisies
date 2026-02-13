@@ -156,7 +156,29 @@ body{
   margin:.75rem auto 0;
   background:linear-gradient(to right, transparent, rgba(243,226,165,.9), transparent);
 }
+.team-section {
+    padding: 80px 20px 40px 20px;
+    text-align: center;
+}
 
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #d4af37; /* or doux */
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    display: block;
+    margin: 15px auto 0;
+}
 /* ================= HERO ================= */
 .hero{
   min-height:72vh;

@@ -136,3 +136,23 @@ input:focus, select:focus, textarea:focus{
 }
 .switchtitle{font-weight:500; color:rgba(255,255,255,.86);}
 .switchtext .hint{margin-top:2px;}
+/* ===== Bouton Réserver dans le menu ===== */
+
+.nav a.btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(212,175,55,0.35);
+  background: rgba(84,18,38,0.55);
+  color: rgba(255,255,255,0.9);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.nav a.btn:hover {
+  background: linear-gradient(to right, #8a1c2e, #d4af37);
+  color: black;
+  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(212,175,55,0.35);
+}

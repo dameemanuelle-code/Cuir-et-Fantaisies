@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réservation | Cuir & Fantaisies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="reservation.css">
+</head>
+
+<body>
+
+<section class="reservation-section">
+
+    <h1 class="page-title">Réserver une séance</h1>
+
+    <form class="reservation-form">
+
+        <!-- Dominatrice -->
+        <div class="form-group">
+            <label>Choisir votre Dominatrice</label>
+            <select required>
+                <option value="">Sélectionner</option>
+                <option>Dame Émanuelle</option>
+                <option>Lady Zaphir</option>
+            </select>
+        </div>
+
+        <!-- Date -->
+        <div class="form-group">
+            <label>Date souhaitée</label>
+            <input type="date" required>
+        </div>
+
+        <!-- Plage horaire -->
+        <div class="form-group">
+            <label>Plage horaire</label>
+            <select required>
+                <option value="">Sélectionner une plage</option>
+                <option>13h00 - 15h00</option>
+                <option>15h30 - 17h30</option>
+                <option>18h00 - 20h00</option>
+                <option>20h30 - 22h30</option>
+            </select>
+        </div>
+
+        <!-- Durée -->
+        <div class="form-group">
+            <label>Durée</label>
+            <select required>
+                <option>1 heure</option>
+                <option>2 heures</option>
+                <option>3 heures</option>
+            </select>
+        </div>
+
+        <!-- Coordonnées -->
+        <div class="form-group">
+            <label>Nom complet</label>
+            <input type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" required>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+            <label>Message complémentaire</label>
+            <textarea rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Envoyer la demande</button>
+
+    </form>
+
+</section>
+
+</body>
+</html>

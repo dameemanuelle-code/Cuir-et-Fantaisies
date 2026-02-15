@@ -1,47 +1,44 @@
-/* ========= CONFIG GOOGLE FORM =========
-1) Mets l'URL "formResponse" ici (voir instructions plus bas)
-2) Mets les entry IDs (entry.xxxxx) correspondant à chaque champ
-====================================== */
+/* Page de réservation premium -> ouvre ton Google Form pré-rempli */
 
-const GOOGLE_FORM = {
-  formResponseUrl: "PASTE_YOUR_FORM_RESPONSE_URL_HERE",
-  // Exemple: https://docs.google.com/forms/d/e/XXXXX/formResponse
+const FORM_VIEW_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdvaqRy2nDmMKOrVVC4Vn0al-Hg6zuMT703LRofp9lGYy9cSw/viewform";
 
-  fields: {
-    dom: "entry.1111111111",
-    date: "entry.2222222222",
-    slot: "entry.3333333333",
-    duration: "entry.4444444444",
-    name: "entry.5555555555",
-    email: "entry.6666666666",
-    message: "entry.7777777777"
-  }
-};
-
-// Créneaux (tu peux ajuster les heures ici)
-const SLOTS = {
-  AM: ["09:30 – 11:30", "11:45 – 13:15"],
-  PM: ["13:30 – 15:30", "15:45 – 17:45"],
-  EVE: ["18:30 – 20:30", "20:45 – 22:45"]
+// Mapping exact depuis ton lien pré-rempli
+const ENTRY = {
+  dom: "entry.1948465557",      // Dominatrice
+  date: "entry.1537833412",     // Date
+  slot: "entry.1709299398",     // Créneau (Am/Pm/Soirée)
+  duration: "entry.246626838",  // Durée
+  name: "entry.1416411362",     // Nom
+  contact: "entry.443720472",   // Coordonnées
+  details: "entry.995574164"    // Détails
 };
 
 const $ = (id) => document.getElementById(id);
+
 const domEl = $("dom");
 const dateEl = $("date");
 const slotEl = $("slot");
+const durationEl = $("duration");
+const nameEl = $("name");
+const contactEl = $("contact");
+const detailsEl = $("details");
+
 const eveningToggleLine = $("eveningToggleLine");
 const eveningWeekEl = $("eveningWeek");
+
+const domHint = $("domHint");
 const dateHint = $("dateHint");
 const slotHint = $("slotHint");
 
+// Règles dispo (selon ce que tu m’as dit)
 function dayOfWeek(dateStr){
   const d = new Date(dateStr + "T12:00:00");
   return d.getDay(); // 0=dim,1=lun,...6=sam
 }
-
-function isWeekend(dow){ return dow === 0 || dow === 6; } // dim/sam
-function isMonToThu(dow){ return dow >= 1 && dow <= 4; } // lun-jeu
-function isWeekday(dow){ return dow >= 1 && dow <= 5; } // lun-ven
+const isWeekend = (dow) => dow === 0 || dow === 6;     // dim/sam
+const isMonToThu = (dow) => dow >= 1 && dow <= 4;      // lun-jeu
+const isWeekday  = (dow) => dow >= 1 && dow <= 5;      // lun-ven
 
 function setOptions(select, options, placeholder="Sélectionner"){
   select.innerHTML = "";
@@ -49,11 +46,10 @@ function setOptions(select, options, placeholder="Sélectionner"){
   ph.value = "";
   ph.textContent = placeholder;
   select.appendChild(ph);
-
-  options.forEach(opt => {
+  options.forEach(v => {
     const o = document.createElement("option");
-    o.value = opt;
-    o.textContent = opt;
+    o.value = v;
+    o.textContent = v;
     select.appendChild(o);
   });
 }
@@ -62,64 +58,82 @@ function computeAvailability(){
   const dom = domEl.value;
   const date = dateEl.value;
 
-  slotHint.textContent = "";
+  domHint.textContent = "";
   dateHint.textContent = "";
+  slotHint.textContent = "";
 
-  if(!dom || !date){
+  if(!dom){
+    setOptions(slotEl, [], "Choisir une dominatrice d’abord");
+    eveningToggleLine.style.display = "none";
+    eveningWeekEl.checked = false;
+    return;
+  }
+
+  if(dom === "Dame Émanuelle"){
+    eveningToggleLine.style.display = "flex"; // soirs 1 semaine sur 2
+    domHint.textContent = "Dame Émanuelle : semaine AM/PM, week-ends PM et parfois soirée.";
+  } else if(dom === "Lady Zaphir"){
+    eveningToggleLine.style.display = "none";
+    eveningWeekEl.checked = false;
+    domHint.textContent = "Lady Zaphir : du lundi au jeudi soir.";
+  } else {
+    // Les deux
+    eveningToggleLine.style.display = "flex";
+    domHint.textContent = "Les deux : options combinées selon la date.";
+  }
+
+  if(!date){
     setOptions(slotEl, [], "Choisir une date d’abord");
     return;
   }
 
   const dow = dayOfWeek(date);
-
-  // Toggle "semaine avec soirs" uniquement pour Dame Émanuelle
-  if(dom === "Dame Émanuelle"){
-    eveningToggleLine.style.display = "flex";
-  } else {
-    eveningToggleLine.style.display = "none";
-    eveningWeekEl.checked = false;
-  }
-
-  let slots = [];
+  let allowed = [];
 
   if(dom === "Lady Zaphir"){
-    // Lady Zaphir: lundi -> jeudi soir
     if(isMonToThu(dow)){
-      slots = [...SLOTS.EVE];
-      dateHint.textContent = "Lady Zaphir : soirées du lundi au jeudi.";
+      allowed = ["Soirée"];
+      dateHint.textContent = "Lady Zaphir est disponible ce jour-là (soir).";
     } else {
-      dateHint.textContent = "Lady Zaphir : disponible uniquement du lundi au jeudi soir.";
+      allowed = [];
+      dateHint.textContent = "Lady Zaphir : uniquement lun-jeu en soirée.";
     }
   }
 
   if(dom === "Dame Émanuelle"){
-    // Dame Émanuelle : semaine AM & PM
-    // soirs occasionnels 1 semaine sur deux (toggle)
-    // week-ends : PM + soir (si toggle on pour le soir)
     if(isWeekday(dow)){
-      slots = [...SLOTS.AM, ...SLOTS.PM];
-      if(eveningWeekEl.checked){
-        slots = [...slots, ...SLOTS.EVE];
-        dateHint.textContent = "Dame Émanuelle : AM/PM en semaine + soirs cette semaine.";
-      } else {
-        dateHint.textContent = "Dame Émanuelle : AM/PM en semaine (soirs selon semaine).";
-      }
+      allowed = ["Am", "Pm"];
+      if(eveningWeekEl.checked) allowed.push("Soirée");
+      dateHint.textContent = eveningWeekEl.checked
+        ? "Dame Émanuelle : AM/PM + soirée cette semaine."
+        : "Dame Émanuelle : AM/PM en semaine (soirée selon semaine).";
     } else if(isWeekend(dow)){
-      slots = [...SLOTS.PM];
-      if(eveningWeekEl.checked){
-        slots = [...slots, ...SLOTS.EVE];
-        dateHint.textContent = "Dame Émanuelle : week-end PM + soirs (selon semaine).";
-      } else {
-        dateHint.textContent = "Dame Émanuelle : week-end PM (soirs selon semaine).";
-      }
+      allowed = ["Pm"];
+      if(eveningWeekEl.checked) allowed.push("Soirée");
+      dateHint.textContent = eveningWeekEl.checked
+        ? "Dame Émanuelle : week-end PM + soirée (selon semaine)."
+        : "Dame Émanuelle : week-end PM (soirée selon semaine).";
     }
   }
 
-  if(slots.length === 0){
+  if(dom === "Les deux"){
+    // Combinaison :
+    // - Lady Zaphir: lun-jeu soir
+    // - Dame Émanuelle: semaine AM/PM (+soir toggle), week-end PM (+soir toggle)
+    const forZaphir = isMonToThu(dow) ? ["Soirée"] : [];
+    const forEma = isWeekday(dow) ? ["Am","Pm"] : (isWeekend(dow) ? ["Pm"] : []);
+    if(eveningWeekEl.checked) forEma.push("Soirée");
+
+    // Union
+    allowed = Array.from(new Set([...forZaphir, ...forEma]));
+    dateHint.textContent = "Disponibilités combinées pour cette date.";
+  }
+
+  if(allowed.length === 0){
     setOptions(slotEl, [], "Aucun créneau disponible");
-    slotHint.textContent = "Choisissez une autre date, ou une autre dominatrice.";
+    slotHint.textContent = "Choisis une autre date ou une autre dominatrice.";
   } else {
-    setOptions(slotEl, slots, "Sélectionner un créneau");
+    setOptions(slotEl, allowed, "Sélectionner");
   }
 }
 
@@ -136,45 +150,34 @@ eveningWeekEl.addEventListener("change", computeAvailability);
   dateEl.min = `${yyyy}-${mm}-${dd}`;
 })();
 
-// Submit -> ouvre Google Form prérempli
 $("bookingForm").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // Vérif config
-  if(GOOGLE_FORM.formResponseUrl.includes("PASTE_YOUR")){
-    alert("Ajoute d’abord ton lien Google Form (formResponse) dans reservation.js");
-    return;
-  }
+  const dom = domEl.value;
+  const date = dateEl.value;
+  const slot = slotEl.value;
+  const duration = durationEl.value;
+  const name = nameEl.value.trim();
+  const contact = contactEl.value.trim();
+  const details = detailsEl.value.trim();
 
-  const payload = {
-    dom: domEl.value,
-    date: dateEl.value,
-    slot: slotEl.value,
-    duration: $("duration").value,
-    name: $("name").value,
-    email: $("email").value,
-    message: $("msg").value || ""
-  };
-
-  // Vérif
-  if(!payload.dom || !payload.date || !payload.slot || !payload.name || !payload.email){
+  if(!dom || !date || !slot || !duration || !name || !contact){
     alert("Merci de compléter tous les champs requis.");
     return;
   }
 
   const params = new URLSearchParams();
-  params.set(GOOGLE_FORM.fields.dom, payload.dom);
-  params.set(GOOGLE_FORM.fields.date, payload.date);
-  params.set(GOOGLE_FORM.fields.slot, payload.slot);
-  params.set(GOOGLE_FORM.fields.duration, payload.duration);
-  params.set(GOOGLE_FORM.fields.name, payload.name);
-  params.set(GOOGLE_FORM.fields.email, payload.email);
-  params.set(GOOGLE_FORM.fields.message, payload.message);
+  params.set(ENTRY.dom, dom);
+  params.set(ENTRY.date, date);
+  params.set(ENTRY.slot, slot);
+  params.set(ENTRY.duration, duration);
+  params.set(ENTRY.name, name);
+  params.set(ENTRY.contact, contact);
+  params.set(ENTRY.details, details);
 
-  // Astuce: on ouvre la version "viewform" pré-remplie (meilleure UX)
-  // On convertit formResponse -> viewform
-  const viewUrl = GOOGLE_FORM.formResponseUrl.replace("/formResponse", "/viewform");
-  const finalUrl = `${viewUrl}?${params.toString()}`;
-
+  const finalUrl = `${FORM_VIEW_URL}?usp=pp_url&${params.toString()}`;
   window.open(finalUrl, "_blank", "noopener,noreferrer");
 });
+
+// Init
+computeAvailability();

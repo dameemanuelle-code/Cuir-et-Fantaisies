@@ -1,111 +1,114 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Réservation | Cuir & Fantaisies</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réservation | Cuir & Fantaisies</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="reservation.css" />
+<link rel="stylesheet" href="reservation.css">
 </head>
 
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html" aria-label="Retour accueil">
-      <span class="dot"></span>
-      <span>Cuir &amp; Fantaisies</span>
+
+<header class="topbar">
+    <a class="brand" href="index.html">
+        <span class="dot"></span>
+        Cuir & Fantaisies
     </a>
     <a class="back" href="index.html">← Retour</a>
-  </header>
+</header>
 
-  <main class="wrap">
-    <section class="card">
-      <h1 class="title">Réserver une séance</h1>
-      <p class="subtitle">Sélectionnez une dominatrice, une date, puis un créneau. Votre demande sera envoyée via notre formulaire.</p>
+<main class="reservation-wrapper">
 
-      <form id="bookingForm" class="form" autocomplete="on">
-        <div class="grid2">
-          <div class="field">
-            <label for="dom">Dominatrice</label>
-            <select id="dom" required>
-              <option value="">Sélectionner</option>
-              <option value="Dame Émanuelle">Dame Émanuelle</option>
-              <option value="Lady Zaphir">Lady Zaphir</option>
-            </select>
-          </div>
+    <section class="reservation-card">
 
-          <div class="field">
-            <label for="date">Date souhaitée</label>
-            <input id="date" type="date" required />
-            <div class="hint" id="dateHint"></div>
-          </div>
-        </div>
+        <h1 class="page-title">Réserver une séance</h1>
+        <p class="subtitle">
+            Sélectionnez une dominatrice, une date et un créneau.  
+            Votre demande sera transmise via notre formulaire officiel.
+        </p>
 
-        <!-- Contrôle simple pour les semaines où Dame Émanuelle accepte des soirs -->
-        <div class="field switchline" id="eveningToggleLine" style="display:none;">
-          <label class="switch">
-            <input id="eveningWeek" type="checkbox" />
-            <span class="slider"></span>
-          </label>
-          <div class="switchtext">
-            <div class="switchtitle">Semaine avec disponibilités en soirée</div>
-            <div class="hint">Active seulement si cette semaine inclut des créneaux “soir” pour Dame Émanuelle.</div>
-          </div>
-        </div>
+        <form id="bookingForm">
 
-        <div class="grid2">
-          <div class="field">
-            <label for="slot">Créneau disponible</label>
-            <select id="slot" required>
-              <option value="">Choisir une date d’abord</option>
-            </select>
-            <div class="hint" id="slotHint"></div>
-          </div>
+            <div class="form-group">
+                <label>Dominatrice</label>
+                <select id="dominatrice" required>
+                    <option value="">Sélectionner</option>
+                    <option value="Dame Émanuelle">Dame Émanuelle</option>
+                    <option value="Lady Zaphir">Lady Zaphir</option>
+                </select>
+            </div>
 
-          <div class="field">
-            <label for="duration">Durée</label>
-            <select id="duration" required>
-              <option value="1h">1 heure</option>
-              <option value="2h">2 heures</option>
-              <option value="3h">3 heures</option>
-            </select>
-          </div>
-        </div>
+            <div class="form-group">
+                <label>Date souhaitée</label>
+                <input type="date" id="date" required>
+            </div>
 
-        <hr class="sep" />
+            <div class="form-group">
+                <label>Créneau</label>
+                <select id="slot" required>
+                    <option value="">Choisir un créneau</option>
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                    <option value="Soir">Soir</option>
+                </select>
+            </div>
 
-        <div class="grid2">
-          <div class="field">
-            <label for="name">Nom complet</label>
-            <input id="name" type="text" required />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" required />
-          </div>
-        </div>
+            <div class="form-group">
+                <label>Durée</label>
+                <select id="duration">
+                    <option>1 heure</option>
+                    <option>2 heures</option>
+                    <option>3 heures</option>
+                </select>
+            </div>
 
-        <div class="field">
-          <label for="msg">Message complémentaire</label>
-          <textarea id="msg" rows="4" placeholder="Contraintes horaires, informations utiles, etc."></textarea>
-        </div>
+            <div class="form-group">
+                <label>Nom complet</label>
+                <input type="text" id="name" required>
+            </div>
 
-        <div class="fineprint">
-          En envoyant, vous confirmez que votre demande respecte notre cadre et que la réponse finale dépendra de validation.
-        </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+            </div>
 
-        <button class="btn" type="submit">Envoyer la demande</button>
+            <div class="form-group">
+                <label>Message complémentaire</label>
+                <textarea id="message" rows="4"></textarea>
+            </div>
 
-        <div class="hint small">
-          (La demande s’ouvre dans Google Forms avec vos champs pré-remplis.)
-        </div>
-      </form>
+            <button type="button" class="btn-primary" onclick="sendForm()">
+                Envoyer la demande
+            </button>
+
+        </form>
+
     </section>
-  </main>
 
-  <script src="reservation.js"></script>
+</main>
+
+<script>
+function sendForm() {
+
+    const baseURL = "https://docs.google.com/forms/d/e/1FAIpQLSdvaqRy2nDmMKOrVVC4Vn0al-Hg6zuMT703LRofp9lGYy9cSw/viewform?usp=pp_url";
+
+    const params =
+        "&entry.1948465557=" + encodeURIComponent(document.getElementById("dominatrice").value) +
+        "&entry.1537833412=" + encodeURIComponent(document.getElementById("date").value) +
+        "&entry.1709299398=" + encodeURIComponent(document.getElementById("slot").value) +
+        "&entry.246626838=" + encodeURIComponent(document.getElementById("duration").value) +
+        "&entry.1416411362=" + encodeURIComponent(document.getElementById("name").value) +
+        "&entry.443720472=" + encodeURIComponent(document.getElementById("email").value) +
+        "&entry.995574164=" + encodeURIComponent(document.getElementById("message").value);
+
+    window.open(baseURL + params, "_blank");
+}
+</script>
+
 </body>
 </html>

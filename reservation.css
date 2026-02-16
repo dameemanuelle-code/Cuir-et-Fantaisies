@@ -1,149 +1,125 @@
-:root{
-  --bg:#070608;
-  --wine:#2a0711;
-  --wine2:#3a0b18;
-  --gold:#d4af37;
-  --text:rgba(255,255,255,.86);
-  --muted:rgba(255,255,255,.66);
-  --strokeGold:rgba(212,175,55,.25);
-}
-
-*{box-sizing:border-box}
 body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(1000px 600px at 50% 10%, rgba(84,18,38,.65), transparent 60%),
-    linear-gradient(to bottom, #0b0a0f, #050507);
+    margin:0;
+    font-family:'Inter', sans-serif;
+    background:
+        radial-gradient(circle at center, #7a0f1e 0%, #120304 70%);
+    color:rgba(255,255,255,0.9);
 }
 
-/* Header */
+/* HEADER */
 .topbar{
-  position:sticky;
-  top:0;
-  background:rgba(0,0,0,0.85);
-  padding:18px 0;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-}
-
-.topbar-inner{
-  width:95%;
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    background:black;
+    border-bottom:1px solid rgba(212,175,55,0.3);
 }
 
 .brand{
-  font-family:'Playfair Display',serif;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  text-decoration:none;
-  color:white;
+    color:#d4af37;
+    text-decoration:none;
+    font-family:'Playfair Display', serif;
+    letter-spacing:2px;
+}
+
+.dot{
+    height:8px;
+    width:8px;
+    background:#d4af37;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:8px;
 }
 
 .back{
-  padding:8px 18px;
-  border-radius:999px;
-  border:1px solid rgba(212,175,55,0.3);
-  background:rgba(84,18,38,0.6);
-  text-decoration:none;
-  color:white;
-  font-size:0.8rem;
-  letter-spacing:2px;
-  transition:.3s;
+    color:#d4af37;
+    text-decoration:none;
 }
 
-.back:hover{
-  background:linear-gradient(to right,#8a1c2e,var(--gold));
-  color:black;
+/* CARD */
+
+.reservation-wrapper{
+    display:flex;
+    justify-content:center;
+    padding:80px 20px;
 }
 
-/* Layout */
-.wrap{
-  max-width:900px;
-  margin:80px auto;
-  padding:0 20px;
+.reservation-card{
+    width:100%;
+    max-width:650px;
+    background:rgba(0,0,0,0.7);
+    padding:50px;
+    border-radius:20px;
+    border:1px solid rgba(212,175,55,0.25);
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);
 }
 
-.card{
-  background:
-    radial-gradient(600px 400px at 40% 20%, rgba(84,18,38,.85), rgba(42,7,17,.6));
-  border:1px solid var(--strokeGold);
-  border-radius:20px;
-  padding:40px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+/* TITRE */
+
+.page-title{
+    text-align:center;
+    font-family:'Playfair Display', serif;
+    font-size:2.2rem;
+    color:#d4af37;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:15px;
 }
 
-/* Title */
-.title{
-  text-align:center;
-  font-family:'Playfair Display',serif;
-  text-transform:uppercase;
-  letter-spacing:4px;
-  color:var(--gold);
-  font-size:2rem;
-  margin-bottom:20px;
+.subtitle{
+    text-align:center;
+    margin-bottom:40px;
+    opacity:0.85;
 }
 
-.title::after{
-  content:"";
-  display:block;
-  width:90px;
-  height:2px;
-  margin:14px auto;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
-}
+/* FORM */
 
-/* Form */
-.form{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:25px;
 }
 
 label{
-  font-size:.85rem;
-  letter-spacing:1px;
-  color:rgba(212,175,55,.8);
+    margin-bottom:8px;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#d4af37;
 }
 
-input,select,textarea{
-  padding:12px;
-  border-radius:12px;
-  border:1px solid rgba(212,175,55,.25);
-  background:rgba(0,0,0,.4);
-  color:white;
+input, select, textarea{
+    padding:12px;
+    background:rgba(20,5,10,0.8);
+    border:1px solid rgba(212,175,55,0.3);
+    border-radius:8px;
+    color:white;
+    font-size:0.95rem;
 }
 
-textarea{
-  min-height:100px;
-  resize:vertical;
+input:focus, select:focus, textarea:focus{
+    outline:none;
+    border-color:#d4af37;
 }
 
-input:focus,select:focus,textarea:focus{
-  outline:none;
-  border-color:rgba(212,175,55,.6);
-  box-shadow:0 0 0 3px rgba(212,175,55,.1);
+/* BUTTON */
+
+.btn-primary{
+    width:100%;
+    padding:15px;
+    background:linear-gradient(135deg,#b3122b,#7a0f1e);
+    border:none;
+    border-radius:30px;
+    color:white;
+    font-weight:500;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-/* Button */
-.btn{
-  margin-top:10px;
-  padding:14px;
-  border-radius:999px;
-  border:1px solid rgba(212,175,55,.4);
-  background:rgba(84,18,38,.7);
-  color:white;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.btn:hover{
-  background:linear-gradient(to right,#8a1c2e,var(--gold));
-  color:black;
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }

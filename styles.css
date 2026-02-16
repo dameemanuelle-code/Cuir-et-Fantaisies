@@ -357,3 +357,8 @@ body{
 #questionnaires a {
   display: inline-block;
 }
+.hero-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}

@@ -178,7 +178,7 @@ body{
   box-shadow: var(--shadow);
   padding: 48px 26px;
 }
-.hero-content{max-width: 920px; margin:0 auto; text-align:left;}
+.hero-content{max-width: 920px; margin:0 auto; text-align:center;}
 .hero-title{
   font-family: "Playfair Display", serif;
   text-transform: uppercase;

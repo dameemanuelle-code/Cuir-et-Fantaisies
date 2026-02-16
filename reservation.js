@@ -1,7 +1,7 @@
 // ====== Google Form ======
 const FORM_BASE =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdvaqRy2nDmMKOrVVC4Vn0al-Hg6zuMT703LRofp9lGYy9cSw/viewform?usp=pp_url";
 
+"https://docs.google.com/forms/d/e/1FAIpQLSdvaqRy2nDmMKOrVVC4Vn0al-Hg6zuMT703LRofp9lGYy9cSw/viewform?usp=header";
 const FIELDS = {
   dom: "entry.1948465557",
   date: "entry.1537833412",

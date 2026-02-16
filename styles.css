@@ -377,3 +377,7 @@ body{
   margin: 120px auto 80px auto; /* centre horizontalement */
   text-align: center;
 }
+.hero {
+  display: flex;
+  justify-content: center;
+}

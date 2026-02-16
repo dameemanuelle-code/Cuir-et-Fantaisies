@@ -156,3 +156,107 @@ input:focus, select:focus, textarea:focus{
   border-color: transparent;
   box-shadow: 0 10px 30px rgba(212,175,55,0.35);
 }
+/* =========================
+   NAV FIX TOTAL (anti-bleu, anti-souligné, anti-conflits)
+   ========================= */
+
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.60));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  width:min(1200px, 96%);
+  margin:0 auto;
+  flex-wrap: wrap;
+}
+
+/* Brand */
+.brand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Playfair Display", serif;
+  text-decoration: none !important;
+}
+.brand-dot{
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d4af37;
+  box-shadow: 0 0 18px rgba(212,175,55,0.45);
+}
+.brand-text{ font-size: 0.95rem; color: rgba(255,255,255,0.86); }
+
+/* Menu links: force neutralisation du bleu/souligné */
+.site-header a,
+.site-header a:visited,
+.site-header a:hover,
+.site-header a:active{
+  text-decoration: none !important;
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Liens simples */
+.nav > a:not(.nav-cta){
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.76) !important;
+  padding: 8px 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.nav > a:not(.nav-cta):hover{
+  color: rgba(255,255,255,0.95) !important;
+  background: rgba(212,175,55,0.08);
+  border-color: rgba(212,175,55,0.22);
+}
+
+/* Bouton Réserver (CTA) */
+.nav-cta{
+  display:inline-block;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(212,175,55,0.35);
+  background: rgba(84,18,38,0.60);
+  color: rgba(255,255,255,0.92) !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  transition: all .25s ease;
+}
+
+.nav-cta:hover{
+  background: linear-gradient(to right, #8a1c2e, #d4af37);
+  color: rgba(0,0,0,0.92) !important;
+  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(212,175,55,0.28);
+}
+
+/* iPad / petits écrans: menu sous le logo si besoin */
+@media (max-width: 860px){
+  .nav-inner{ align-items:flex-start; }
+  .nav{ width:100%; justify-content:flex-start; }
+}

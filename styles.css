@@ -189,8 +189,9 @@ body{
 }
 .hero-lead{margin:0 0 22px; color: var(--muted); max-width: 800px; line-height: 1.7;}
 
-.hero-buttons{
-  display:flex;
+.hero-buttons {
+  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
 }

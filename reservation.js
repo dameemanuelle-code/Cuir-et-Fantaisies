@@ -1,183 +1,281 @@
-/* Page de réservation premium -> ouvre ton Google Form pré-rempli */
+// ====== Google Form ======
+const FORM_BASE =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdvaqRy2nDmMKOrVVC4Vn0al-Hg6zuMT703LRofp9lGYy9cSw/viewform?usp=pp_url";
 
-const FORM_VIEW_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdvaqRy2nDmMKOrVVC4Vn0al-Hg6zuMT703LRofp9lGYy9cSw/viewform";
-
-// Mapping exact depuis ton lien pré-rempli
-const ENTRY = {
-  dom: "entry.1948465557",      // Dominatrice
-  date: "entry.1537833412",     // Date
-  slot: "entry.1709299398",     // Créneau (Am/Pm/Soirée)
-  duration: "entry.246626838",  // Durée
-  name: "entry.1416411362",     // Nom
-  contact: "entry.443720472",   // Coordonnées
-  details: "entry.995574164"    // Détails
+const FIELDS = {
+  dom: "entry.1948465557",
+  date: "entry.1537833412",
+  slot: "entry.1709299398",
+  duration: "entry.246626838",
+  name: "entry.1416411362",
+  email: "entry.443720472",
+  message: "entry.995574164"
 };
 
-const $ = (id) => document.getElementById(id);
+// ====== DOM ======
+const domSelect = document.getElementById("dominatrice");
+const dateInput = document.getElementById("date");
+const slotSelect = document.getElementById("slot");
+const slotPills = document.getElementById("slotPills");
+const slotHint = document.getElementById("slotHint");
 
-const domEl = $("dom");
-const dateEl = $("date");
-const slotEl = $("slot");
-const durationEl = $("duration");
-const nameEl = $("name");
-const contactEl = $("contact");
-const detailsEl = $("details");
+const durationSelect = document.getElementById("duration");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
 
-const eveningToggleLine = $("eveningToggleLine");
-const eveningWeekEl = $("eveningWeek");
+const calendarEl = document.getElementById("calendar");
+const calendarHint = document.getElementById("calendarHint");
 
-const domHint = $("domHint");
-const dateHint = $("dateHint");
-const slotHint = $("slotHint");
+// Expose pour le bouton
+window.sendForm = sendForm;
 
-// Règles dispo (selon ce que tu m’as dit)
-function dayOfWeek(dateStr){
-  const d = new Date(dateStr + "T12:00:00");
-  return d.getDay(); // 0=dim,1=lun,...6=sam
-}
-const isWeekend = (dow) => dow === 0 || dow === 6;     // dim/sam
-const isMonToThu = (dow) => dow >= 1 && dow <= 4;      // lun-jeu
-const isWeekday  = (dow) => dow >= 1 && dow <= 5;      // lun-ven
+// ====== Utils ======
+function pad(n){ return String(n).padStart(2, "0"); }
+function toISODate(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function midLocalDateFromISO(iso){ return new Date(iso + "T12:00:00"); } // évite bugs timezone
 
-function setOptions(select, options, placeholder="Sélectionner"){
-  select.innerHTML = "";
-  const ph = document.createElement("option");
-  ph.value = "";
-  ph.textContent = placeholder;
-  select.appendChild(ph);
-  options.forEach(v => {
-    const o = document.createElement("option");
-    o.value = v;
-    o.textContent = v;
-    select.appendChild(o);
-  });
+function getISOWeek(date){
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
 
-function computeAvailability(){
-  const dom = domEl.value;
-  const date = dateEl.value;
+const DOW = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
-  domHint.textContent = "";
-  dateHint.textContent = "";
-  slotHint.textContent = "";
+// ====== Règles disponibilités (best-effort) ======
+function computeAvailableSlots(dominatrice, date){
+  if (!dominatrice || !date) return [];
 
-  if(!dom){
-    setOptions(slotEl, [], "Choisir une dominatrice d’abord");
-    eveningToggleLine.style.display = "none";
-    eveningWeekEl.checked = false;
-    return;
+  const day = date.getDay(); // 0 dim ... 6 sam
+  const isWeekend = (day === 0 || day === 6);
+  const isWeekday = !isWeekend;
+
+  if (dominatrice === "Lady Zaphir") {
+    // lundi(1) à jeudi(4) soir uniquement
+    if (day >= 1 && day <= 4) return ["Soir"];
+    return [];
   }
 
-  if(dom === "Dame Émanuelle"){
-    eveningToggleLine.style.display = "flex"; // soirs 1 semaine sur 2
-    domHint.textContent = "Dame Émanuelle : semaine AM/PM, week-ends PM et parfois soirée.";
-  } else if(dom === "Lady Zaphir"){
-    eveningToggleLine.style.display = "none";
-    eveningWeekEl.checked = false;
-    domHint.textContent = "Lady Zaphir : du lundi au jeudi soir.";
-  } else {
-    // Les deux
-    eveningToggleLine.style.display = "flex";
-    domHint.textContent = "Les deux : options combinées selon la date.";
-  }
+  if (dominatrice === "Dame Émanuelle") {
+    const week = getISOWeek(date);
+    const eveningWeek = (week % 2 === 0); // semaines paires -> soir dispo
 
-  if(!date){
-    setOptions(slotEl, [], "Choisir une date d’abord");
-    return;
-  }
-
-  const dow = dayOfWeek(date);
-  let allowed = [];
-
-  if(dom === "Lady Zaphir"){
-    if(isMonToThu(dow)){
-      allowed = ["Soirée"];
-      dateHint.textContent = "Lady Zaphir est disponible ce jour-là (soir).";
-    } else {
-      allowed = [];
-      dateHint.textContent = "Lady Zaphir : uniquement lun-jeu en soirée.";
+    if (isWeekday) {
+      const slots = ["AM", "PM"];
+      if (eveningWeek) slots.push("Soir");
+      return slots;
     }
+
+    // week-end : "une partie" => PM + parfois soir
+    const slots = ["PM"];
+    if (eveningWeek) slots.push("Soir");
+    return slots;
   }
 
-  if(dom === "Dame Émanuelle"){
-    if(isWeekday(dow)){
-      allowed = ["Am", "Pm"];
-      if(eveningWeekEl.checked) allowed.push("Soirée");
-      dateHint.textContent = eveningWeekEl.checked
-        ? "Dame Émanuelle : AM/PM + soirée cette semaine."
-        : "Dame Émanuelle : AM/PM en semaine (soirée selon semaine).";
-    } else if(isWeekend(dow)){
-      allowed = ["Pm"];
-      if(eveningWeekEl.checked) allowed.push("Soirée");
-      dateHint.textContent = eveningWeekEl.checked
-        ? "Dame Émanuelle : week-end PM + soirée (selon semaine)."
-        : "Dame Émanuelle : week-end PM (soirée selon semaine).";
-    }
+  return [];
+}
+
+// ====== Slots UI ======
+function setSlotOptions(slots){
+  slotSelect.innerHTML = "";
+
+  if (!slots.length) {
+    const opt = document.createElement("option");
+    opt.value = "";
+    opt.textContent = "Aucun créneau disponible";
+    slotSelect.appendChild(opt);
+    slotSelect.value = "";
+    return;
   }
 
-  if(dom === "Les deux"){
-    // Combinaison :
-    // - Lady Zaphir: lun-jeu soir
-    // - Dame Émanuelle: semaine AM/PM (+soir toggle), week-end PM (+soir toggle)
-    const forZaphir = isMonToThu(dow) ? ["Soirée"] : [];
-    const forEma = isWeekday(dow) ? ["Am","Pm"] : (isWeekend(dow) ? ["Pm"] : []);
-    if(eveningWeekEl.checked) forEma.push("Soirée");
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Choisir un créneau";
+  slotSelect.appendChild(placeholder);
 
-    // Union
-    allowed = Array.from(new Set([...forZaphir, ...forEma]));
-    dateHint.textContent = "Disponibilités combinées pour cette date.";
-  }
-
-  if(allowed.length === 0){
-    setOptions(slotEl, [], "Aucun créneau disponible");
-    slotHint.textContent = "Choisis une autre date ou une autre dominatrice.";
-  } else {
-    setOptions(slotEl, allowed, "Sélectionner");
+  for (const s of slots) {
+    const opt = document.createElement("option");
+    opt.value = s;
+    opt.textContent = s;
+    slotSelect.appendChild(opt);
   }
 }
 
-domEl.addEventListener("change", computeAvailability);
-dateEl.addEventListener("change", computeAvailability);
-eveningWeekEl.addEventListener("change", computeAvailability);
+function renderPills(slots){
+  slotPills.innerHTML = "";
+  if (!slots.length) return;
 
-// Empêcher dates passées
-(function initDateMin(){
-  const now = new Date();
-  const yyyy = now.getFullYear();
-  const mm = String(now.getMonth()+1).padStart(2,"0");
-  const dd = String(now.getDate()).padStart(2,"0");
-  dateEl.min = `${yyyy}-${mm}-${dd}`;
-})();
+  const current = slotSelect.value;
 
-$("bookingForm").addEventListener("submit", (e) => {
-  e.preventDefault();
+  for (const s of slots) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "pill" + (current === s ? " active" : "");
+    btn.textContent = s;
 
-  const dom = domEl.value;
-  const date = dateEl.value;
-  const slot = slotEl.value;
-  const duration = durationEl.value;
-  const name = nameEl.value.trim();
-  const contact = contactEl.value.trim();
-  const details = detailsEl.value.trim();
+    btn.addEventListener("click", () => {
+      slotSelect.value = s;
+      renderPills(slots);
+    });
 
-  if(!dom || !date || !slot || !duration || !name || !contact){
-    alert("Merci de compléter tous les champs requis.");
+    slotPills.appendChild(btn);
+  }
+}
+
+function updateSlotHint(dom, date, slots){
+  if (!dom) {
+    slotHint.textContent = "Choisissez d’abord une dominatrice.";
     return;
   }
+  if (!date) {
+    slotHint.textContent = "Choisissez une date (calendrier) pour afficher les créneaux.";
+    return;
+  }
+  if (!slots.length) {
+    slotHint.textContent = "Aucun créneau disponible pour cette date.";
+    return;
+  }
+
+  if (dom === "Lady Zaphir") {
+    slotHint.textContent = "Lady Zaphir : lundi à jeudi — soir uniquement.";
+    return;
+  }
+
+  const week = getISOWeek(date);
+  const eveningWeek = (week % 2 === 0);
+  slotHint.textContent = eveningWeek
+    ? "Dame Émanuelle : AM/PM en semaine + soir (semaine alternée). Week-end : PM + parfois soir."
+    : "Dame Émanuelle : AM/PM en semaine. Week-end : PM (soir non disponible cette semaine).";
+}
+
+function refreshAvailability(){
+  const dom = domSelect.value;
+  const iso = dateInput.value;
+
+  if (!dom || !iso) {
+    setSlotOptions([]);
+    slotPills.innerHTML = "";
+    updateSlotHint(dom, iso ? midLocalDateFromISO(iso) : null, []);
+    return;
+  }
+
+  const d = midLocalDateFromISO(iso);
+  const slots = computeAvailableSlots(dom, d);
+
+  setSlotOptions(slots);
+  renderPills(slots);
+  updateSlotHint(dom, d, slots);
+}
+
+// ====== Calendrier visuel (14 jours) ======
+let selectedISO = "";
+
+function renderCalendar(){
+  calendarEl.innerHTML = "";
+
+  const dom = domSelect.value;
+  const today = new Date();
+  today.setHours(12,0,0,0);
+
+  const daysToShow = 14;
+
+  for (let i = 0; i < daysToShow; i++){
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+
+    const iso = toISODate(d);
+    const slots = computeAvailableSlots(dom, d);
+    const hasSlots = slots.length > 0;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "day" + (hasSlots ? "" : " disabled") + (iso === selectedISO ? " selected" : "");
+
+    btn.setAttribute("data-iso", iso);
+
+    btn.innerHTML = `
+      <div class="day-top">
+        <div class="day-num">${d.getDate()}</div>
+        <div class="day-dow">${DOW[d.getDay()]}</div>
+      </div>
+      <div class="day-badges">
+        ${hasSlots ? slots.map(s => `<span class="badge">${s}</span>`).join("") : `<span class="badge">Indispo</span>`}
+      </div>
+    `;
+
+    if (hasSlots) {
+      btn.addEventListener("click", () => {
+        selectedISO = iso;
+        dateInput.value = iso;
+        renderCalendar();      // refresh selection
+        refreshAvailability(); // refresh slots
+      });
+    }
+
+    calendarEl.appendChild(btn);
+  }
+
+  // Hint calendrier
+  if (!dom) {
+    calendarHint.textContent = "Choisissez une dominatrice pour afficher les jours disponibles.";
+  } else {
+    calendarHint.textContent = "Cliquez un jour disponible pour le sélectionner (les jours grisés sont indisponibles).";
+  }
+}
+
+// ====== Submit Google Form ======
+function sendForm(){
+  if (!domSelect.value) return alert("Veuillez choisir une dominatrice.");
+  if (!dateInput.value) return alert("Veuillez choisir une date.");
+  if (!slotSelect.value) return alert("Veuillez choisir un créneau.");
+  if (!nameInput.value.trim()) return alert("Veuillez entrer votre nom.");
+  if (!emailInput.value.trim()) return alert("Veuillez entrer votre email.");
 
   const params = new URLSearchParams();
-  params.set(ENTRY.dom, dom);
-  params.set(ENTRY.date, date);
-  params.set(ENTRY.slot, slot);
-  params.set(ENTRY.duration, duration);
-  params.set(ENTRY.name, name);
-  params.set(ENTRY.contact, contact);
-  params.set(ENTRY.details, details);
+  params.set(FIELDS.dom, domSelect.value);
+  params.set(FIELDS.date, dateInput.value);
+  params.set(FIELDS.slot, slotSelect.value);
+  params.set(FIELDS.duration, durationSelect.value);
+  params.set(FIELDS.name, nameInput.value.trim());
+  params.set(FIELDS.email, emailInput.value.trim());
+  params.set(FIELDS.message, messageInput.value.trim());
 
-  const finalUrl = `${FORM_VIEW_URL}?usp=pp_url&${params.toString()}`;
-  window.open(finalUrl, "_blank", "noopener,noreferrer");
-});
+  const url = `${FORM_BASE}&${params.toString()}`;
+  window.open(url, "_blank");
+}
 
-// Init
-computeAvailability();
+// ====== Init ======
+(function init(){
+  // date min = aujourd’hui
+  const now = new Date();
+  now.setHours(12,0,0,0);
+  dateInput.min = toISODate(now);
+
+  domSelect.addEventListener("change", () => {
+    // reset selection date quand on change de dom
+    selectedISO = dateInput.value || "";
+    renderCalendar();
+    refreshAvailability();
+  });
+
+  dateInput.addEventListener("change", () => {
+    selectedISO = dateInput.value || "";
+    renderCalendar();
+    refreshAvailability();
+  });
+
+  slotSelect.addEventListener("change", () => {
+    const dom = domSelect.value;
+    const iso = dateInput.value;
+    if (!dom || !iso) return;
+    const slots = computeAvailableSlots(dom, midLocalDateFromISO(iso));
+    renderPills(slots);
+  });
+
+  selectedISO = dateInput.value || "";
+  renderCalendar();
+  refreshAvailability();
+})();

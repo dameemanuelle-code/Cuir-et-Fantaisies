@@ -358,3 +358,60 @@ body{
 #questionnaires a {
   display: inline-block;
 }
+/* === BLOC PROFIL EXTERNE — CUIR & FANTAISIES === */
+
+.cf-external {
+  padding: 28px 16px;
+  margin-top: 28px;
+}
+
+.cf-external__inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 22px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  background: linear-gradient(
+    180deg,
+    rgba(16, 10, 12, 0.92),
+    rgba(32, 12, 18, 0.92)
+  );
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.cf-external__title {
+  margin: 0 0 10px 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.4px;
+  color: rgba(212, 175, 55, 0.98);
+}
+
+.cf-external__text {
+  margin: 0 0 16px 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.cf-external__brand {
+  color: rgba(212, 175, 55, 0.95);
+  font-weight: 600;
+}
+
+.cf-external__btn {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  color: rgba(212, 175, 55, 0.98);
+  background: rgba(120, 0, 32, 0.22);
+  transition: all 0.2s ease;
+}
+
+.cf-external__btn:hover {
+  background: rgba(120, 0, 32, 0.35);
+  border-color: rgba(212, 175, 55, 0.9);
+}

@@ -415,3 +415,12 @@ body{
   background: rgba(120, 0, 32, 0.35);
   border-color: rgba(212, 175, 55, 0.9);
 }
+.site-logo {
+  text-align: center;
+  margin: 10px 0 20px 0;
+}
+
+.site-logo img {
+  max-width: 260px;
+  height: auto;
+}

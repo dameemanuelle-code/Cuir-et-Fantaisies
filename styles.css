@@ -429,3 +429,13 @@ body{
   height: auto;
   filter: drop-shadow(0 0 8px rgba(180,0,0,0.4));
 }
+.site-logo{
+  display:flex;
+  justify-content:center;
+  margin:40px 0 20px 0;
+}
+
+.site-logo img{
+  width:220px;
+  height:auto;
+}

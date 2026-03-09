@@ -421,11 +421,11 @@ body{
 }
 
 .site-logo img {
-  max-width: 260px;
+  max-width: 780px;
   height: auto;
 }
 .site-logo img {
-  max-width: 260px;
+  max-width: 780px;
   height: auto;
   filter: drop-shadow(0 0 8px rgba(180,0,0,0.4));
 }

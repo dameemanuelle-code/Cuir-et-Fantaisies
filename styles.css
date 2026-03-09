@@ -421,7 +421,6 @@ body{
   text-align: center;
   margin: 10px 0 20px 0;
 }
-
 .site-logo{
   display:flex;
   justify-content:center;
@@ -429,18 +428,6 @@ body{
 }
 
 .site-logo img{
-  width:var(--logo-size);
-  height:auto;
-  max-width:none;
-  filter: drop-shadow(0 0 14px rgba(180,0,0,0.45));
-}
-.site-logo{
-  display:flex;
-  justify-content:center;
-  margin:40px 0 20px 0;
-}
-
-.site-logo img{
-  width:660px;
+  width:300px;
   height:auto;
 }

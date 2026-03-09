@@ -14,7 +14,9 @@
   --radius:18px;
   --shadow: 0 30px 90px rgba(0,0,0,.55);
 }
-
+:root{
+  --logo-size: 780px;
+}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
@@ -420,16 +422,17 @@ body{
   margin: 10px 0 20px 0;
 }
 
-.site-logo {
+.site-logo{
   display:flex;
   justify-content:center;
   margin:40px 0 20px 0;
 }
 
 .site-logo img{
-  width:780px;
+  width:var(--logo-size);
   height:auto;
-  filter: drop-shadow(0 0 10px rgba(180,0,0,0.4));
+  max-width:none;
+  filter: drop-shadow(0 0 14px rgba(180,0,0,0.45));
 }
 .site-logo{
   display:flex;

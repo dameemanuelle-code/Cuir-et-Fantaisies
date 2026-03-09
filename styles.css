@@ -420,14 +420,16 @@ body{
   margin: 10px 0 20px 0;
 }
 
-.site-logo img {
-  max-width: 780px;
-  height: auto;
+.site-logo {
+  display:flex;
+  justify-content:center;
+  margin:40px 0 20px 0;
 }
-.site-logo img {
-  max-width: 780px;
-  height: auto;
-  filter: drop-shadow(0 0 8px rgba(180,0,0,0.4));
+
+.site-logo img{
+  width:780px;
+  height:auto;
+  filter: drop-shadow(0 0 10px rgba(180,0,0,0.4));
 }
 .site-logo{
   display:flex;

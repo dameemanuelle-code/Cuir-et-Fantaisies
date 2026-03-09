@@ -15,7 +15,7 @@
   --shadow: 0 30px 90px rgba(0,0,0,.55);
 }
 :root{
-  --logo-size: 400px;
+  --logo-size: 480px;
 }
 *{box-sizing:border-box}
 html,body{margin:0}

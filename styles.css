@@ -417,17 +417,14 @@ body{
   background: rgba(120, 0, 32, 0.35);
   border-color: rgba(212, 175, 55, 0.9);
 }
-.site-logo {
-  text-align: center;
-  margin: 10px 0 0 0;
-}
 .site-logo{
   display:flex;
   justify-content:center;
-  margin:10px 0 0 0;
+  align-items:center;
+  margin:20px 0 10px 0;
 }
-
 .site-logo img{
-  width:300px;
+  width:420px;
+  max-width:90%;
   height:auto;
 }

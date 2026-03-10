@@ -435,13 +435,8 @@ body{
   align-items: center;
   margin: 18px 0 6px 0;
 }
-
 .site-logo img{
-  display: block;
-  width: 440px;
-  max-width: 92vw;
+  width: 650px;
+  max-width: 95%;
   height: auto;
-  filter:
-    drop-shadow(0 0 18px rgba(180, 0, 0, 0.28))
-    drop-shadow(0 10px 24px rgba(0, 0, 0, 0.32));
 }
